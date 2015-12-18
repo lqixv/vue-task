@@ -7,7 +7,7 @@
     <script type="text/javascript">
       var data = {
           title: '任务列表',
-          task: {'state': 0, 'content': ''},
+          task: {'state': 1, 'content': ''},
           todos:[
             {
               'state':2,
@@ -50,7 +50,7 @@
           methods: {
             add: function(){
               this.todos.push(this.task);
-              this.task = {'state': 0, 'content': ''};
+              this.task = {'state': 1, 'content': ''};
             },
             chgStage: function (task) {
               task.state = task.state == 2 ? 1 : 2;
