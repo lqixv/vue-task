@@ -7,7 +7,8 @@
     <script type="text/javascript">
       var data = {
           title: '任务列表',
-          task: {'state': 0, 'content': ''},
+          state: -1,
+          task: {'state': 1, 'content': ''},
           todos:[
             {
               'state':2,
@@ -38,9 +39,11 @@
         <ol>
           <li 
             v-for='todo in todos'
-            :class="todo.state == 2 ? 'done' : ''" @click='chgStage(todo)'>{{todo.content}}<button @click='del(todo)'>-</button></li>
+            :class="todo.state == 2 ? 'done' : ''" @click='chgStage(todo)' v-if='state < 0 || todo.state == state'>{{todo.content}}<button @click='del(todo)'>-</button></li>
         </ol>
-        
+        <input type='radio' name='state' id='all' value='-1' v-model='state'><label for="all">全部</label>
+        <input type='radio' name='state' id='todo' value='1' v-model='state'><label for="all">未完成</label>
+        <input type='radio' name='state' id='done' value='2' v-model='state'><label for="all">已完成</label>
     </div>
   </body>
   <script type="text/javascript">
@@ -50,7 +53,7 @@
           methods: {
             add: function(){
               this.todos.push(this.task);
-              this.task = {'state': 0, 'content': ''};
+              this.task = {'state': 1, 'content': ''};
             },
             chgStage: function (task) {
               task.state = task.state == 2 ? 1 : 2;
