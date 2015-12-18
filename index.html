@@ -8,6 +8,11 @@
       var data = {
           title: '任务列表',
           state: -1,
+          stages: [
+            {'key': 'all', 'val': '-1', 'title': '全部'},
+            {'key': 'todo', 'val': '1', 'title': '未完成'},
+            {'key': 'done', 'val': '2', 'title': '已完成'}
+          ],
           task: {'state': 1, 'content': ''},
           todos:[
             {
@@ -41,9 +46,9 @@
             v-for='todo in todos'
             :class="todo.state == 2 ? 'done' : ''" @click='chgStage(todo)' v-if='state < 0 || todo.state == state'>{{todo.content}}<button @click='del(todo)'>-</button></li>
         </ol>
-        <input type='radio' name='state' id='all' value='-1' v-model='state'><label for="all">全部</label>
-        <input type='radio' name='state' id='todo' value='1' v-model='state'><label for="all">未完成</label>
-        <input type='radio' name='state' id='done' value='2' v-model='state'><label for="all">已完成</label>
+        <template v-for='stage in stages'>
+        <input type='radio' name='state' :id='stage.key' :value='stage.val' v-model='state'><label :for="stage.key">{{stage.title}}</label>
+        </template>
     </div>
   </body>
   <script type="text/javascript">
