@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Vue-task</title>
+    <script src="js/vue.js"></script>
+    <script type="text/javascript">
+      var data = {
+          title: '任务列表',
+          todos:[
+            {
+              'state':2,
+              'content': '任务0'
+            },
+            {
+              'state':1,
+              'content': '任务1'
+            },
+            {
+              'state':1,
+              'content': '任务2'
+            }
+          ]
+      };
+    </script>
+    <style type="text/css">
+      .done{
+        text-decoration: line-through;
+        color: red;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+        <h1>{{title}}</h1>
+        <ul>
+          <li 
+            v-for='todo in todos'
+            :class="todo.state == 2 ? 'done' : ''">{{todo.content}}</li>
+        </ul>
+        
+    </div>
+  </body>
+  <script type="text/javascript">
+      var demo = new Vue({
+          el: '#app',
+          data: data
+      })
+  </script>
+</html>
