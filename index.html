@@ -38,7 +38,7 @@
         <ol>
           <li 
             v-for='todo in todos'
-            :class="todo.state == 2 ? 'done' : ''" @click='chgStage(todo)'>{{todo.content}}</li>
+            :class="todo.state == 2 ? 'done' : ''" @click='chgStage(todo)'>{{todo.content}}<button @click='del(todo)'>-</button></li>
         </ol>
         
     </div>
@@ -52,8 +52,11 @@
               this.todos.push(this.task);
               this.task = {'state': 0, 'content': ''};
             },
-            chgStage: function (todo) {
-              todo.state = todo.state == 2 ? 1 : 2;
+            chgStage: function (task) {
+              task.state = task.state == 2 ? 1 : 2;
+            },
+            del: function (task) {
+              this.todos.$remove(task);
             }
           }
       })
